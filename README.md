@@ -28,7 +28,7 @@ Run the docker image : <br/>
 docker run keboola-list-files 
 `<br/><br/>
 
-To view the csv file I used :<br/>
+To view the csv file with a run I used :<br/>
 
 `
 docker run --rm -it --entrypoint=/bin/bash keboola-list-files
