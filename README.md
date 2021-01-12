@@ -1,7 +1,7 @@
 # keboola-list-files
 This Python app uses the Keboola Api to fetch a list of files in storage
 
-The app first obtains the storage API token from the congig.json file. It then uses a limit and offset to get paginated results from the API. These results are concatenated and then saved to a resulting CSV file : keboola_file_list.csv .
+The app first obtains the storage API token from the config.json file. It then uses a limit and offset to get paginated results from the API. These results are concatenated and then saved to a resulting CSV file : keboola_file_list.csv .
 
 ## Use
 
