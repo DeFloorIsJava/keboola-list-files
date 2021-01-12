@@ -16,8 +16,24 @@ Add the necessary X-StorageApi-Token to the config.json file<br/><br/>
   "X-StorageApi-Token" : "your_storage_token_here"
 }
 `<br/><br/>
-Run the code : <br/>
+Build the docker image : <br/>
 
 `
+docker build -t keboola-list-files .
+`<br/>
+
+Run the docker image : <br/>
+
+`
+docker run keboola-list-files 
+`<br/><br/>
+
+To view the csv file I used :<br/>
+
+`
+docker run --rm -it --entrypoint=/bin/bash keboola-list-files
+
 python list_kbc_files.py
+
+cat keboola_file_list.csv
 `<br/>
