@@ -51,10 +51,10 @@ def get_all_kbc_files(api_header):
         api_responses.append(response.json())
 
         if is_file_list_exhausted(response, LIMIT):
-            log.info('Data retrieved, a total of %s files listed',
-                     len(api_responses))
             api_responses = [item for sublist in api_responses
                              for item in sublist]
+            log.info('Data retrieved, a total of %s files listed',
+                     len(api_responses))
             return api_responses
 
         # Increase the offset by the limit for the next API call
@@ -123,12 +123,13 @@ def postprocess_responses(api_responses):
     # Make a dataframe from the list of dictionaries
     res_df = pd.DataFrame(api_responses)
 
-    # Flatten the creator_tokens dict within the dataframe and add prefix
-    creator_tokens = pd.DataFrame(res_df['creatorToken'].values.tolist(),
-                                  index=res_df.index)
-    creator_tokens = creator_tokens.add_prefix('creatorToken_')
-    res_df = pd.concat([res_df, creator_tokens], axis=1)
-    res_df = res_df.drop('creatorToken', axis=1)
+    if 'creatorToken' in res_df.columns:
+        # Flatten the creator_tokens dict within the dataframe and add prefix
+        creator_tokens = pd.DataFrame(res_df['creatorToken'].values.tolist(),
+                                      index=res_df.index)
+        creator_tokens = creator_tokens.add_prefix('creatorToken_')
+        res_df = pd.concat([res_df, creator_tokens], axis=1)
+        res_df = res_df.drop('creatorToken', axis=1)
     return res_df
 
 
